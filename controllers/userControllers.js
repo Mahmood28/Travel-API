@@ -7,6 +7,9 @@ exports.signup = async (req, res, next) => {
 	const { password } = req.body;
 	const saltRounds = 10;
 	try {
+		if (req.file) {
+			req.body.picture = `http://${req.get('host')}/media/${req.file.filename}`;
+		}
 		const hashedPassword = await bcrypt.hash(password, saltRounds);
 		req.body.password = hashedPassword;
 		const newUser = await User.create(req.body);
