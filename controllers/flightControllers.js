@@ -9,3 +9,12 @@ exports.flightCreate = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.flightList = async (req, res, next) => {
+  try {
+    const flights = await Flight.findAll();
+    res.json(flights);
+  } catch (error) {
+    next(error);
+  }
+};
