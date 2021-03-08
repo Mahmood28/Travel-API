@@ -47,10 +47,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(3),
         allowNull: false,
       },
-      arrivalAirport: {
-        type: DataTypes.STRING(3),
-        allowNull: false,
-      },
       price: {
         type: DataTypes.DECIMAL,
         allowNull: false,
