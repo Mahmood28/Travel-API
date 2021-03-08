@@ -1,11 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {
-  flightCreate,
-  flightList,
-} = require("../controllers/flightControllers");
-
-router.post("/", flightCreate);
+const { flightList } = require("../controllers/flightControllers");
 
 router.get("/", flightList);
 

@@ -6,7 +6,7 @@ const upload = require("../middleware/multer");
 router.post("/signup", upload.single("picture"), signup);
 router.post(
   "/signin",
-  passport.authenticate("local", { session: false }),
+  passport.authenticate("user", { session: false }),
   signin
 );
 
