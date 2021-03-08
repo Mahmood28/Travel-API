@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATEONLY,
         allowNull: false,
         validate: {
-          isAfterDeparture: function (value) {
+          isAfterDepartureDate: function (value) {
             if (new Date(value) < new Date(this.departureDate))
               throw new Error("arrival date cannot be before departure date!");
           },
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
-          isAfterDeparture: function (value) {
+          isAfterDepartureTime: function (value) {
             if (
               this.arrivalDate === this.departureDate &&
               value <= this.departureTime + 2
