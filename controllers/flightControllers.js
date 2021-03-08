@@ -1,4 +1,4 @@
-const { Flight } = require("../db/models");
+const { Flight, Destination } = require("../db/models");
 
 exports.flightCreate = async (req, res, next) => {
   try {
@@ -12,7 +12,13 @@ exports.flightCreate = async (req, res, next) => {
 
 exports.flightList = async (req, res, next) => {
   try {
-    const flights = await Flight.findAll();
+    const flights = await Flight.findAll({
+      include: {
+        model: Destination,
+        as: "destination",
+        attributes: ["airport"],
+      },
+    });
     res.json(flights);
   } catch (error) {
     next(error);

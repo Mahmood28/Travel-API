@@ -47,6 +47,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(3),
         allowNull: false,
       },
+      economyPrice: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      businessPrice: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
     },
     { timestamps: false }
   );
