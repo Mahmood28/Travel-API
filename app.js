@@ -3,12 +3,16 @@ const db = require("./db/models");
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const flightRoutes = require("./routes/flights");
 
 const app = express();
 
 //Middleware
 app.use(cors());
+app.use(express.json());
+app.use("/flights", flightRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
+
 app.use((req, res, next) => {
   const error = {
     status: 404,
