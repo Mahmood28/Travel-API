@@ -43,6 +43,10 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+//Reations
+db.Airline.hasMany(db.Flight, { foreignKey: "airlineId", as: "flights" });
+db.Flight.belongsTo(db.Airline, { foreignKey: "airlineId", as: "airlines" });
+
 db.Destination.hasMany(db.Flight, {
   foreignKey: { fieldName: "destinationId" },
   as: "flights",
