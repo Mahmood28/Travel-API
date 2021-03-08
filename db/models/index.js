@@ -47,4 +47,34 @@ db.Sequelize = Sequelize;
 db.Airline.hasMany(db.Flight, { foreignKey: "airlineId", as: "flights" });
 db.Flight.belongsTo(db.Airline, { foreignKey: "airlineId", as: "airlines" });
 
+db.Destination.hasMany(db.Flight, {
+  foreignKey: { fieldName: "destinationId" },
+  as: "flights",
+});
+
+db.Flight.belongsTo(db.Destination, {
+  foreignKey: { fieldName: "destinationId" },
+  as: "destination",
+});
+
+db.Flight.hasMany(db.TravelClassCapacity, {
+  foreignKey: { fieldName: "flightId" },
+  as: "capacities",
+});
+
+db.TravelClassCapacity.belongsTo(db.Flight, {
+  foreignKey: { fieldName: "flightId" },
+  as: "flight",
+});
+
+db.TravelClass.hasMany(db.TravelClassCapacity, {
+  foreignKey: { fieldName: "travelClassId" },
+  as: "capacities",
+});
+
+db.TravelClassCapacity.belongsTo(db.TravelClass, {
+  foreignKey: { fieldName: "travelClassId" },
+  as: "travelClass",
+});
+
 module.exports = db;

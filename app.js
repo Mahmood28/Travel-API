@@ -42,7 +42,6 @@ app.use((err, req, res, next) => {
 // db.sequelize.sync();
 db.sequelize.sync({ alter: true });
 // db.sequelize.sync({ force: true });
-
 app.listen(8000);
 
 //yarn add express cors sequelize sequelize-cli pg pg-hstore multer
