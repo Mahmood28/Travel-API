@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const { signup, signin } = require("../controllers/userControllers");
+const { signup, signin } = require("../controllers/airlineControllers");
 const upload = require("../middleware/multer");
-router.post("/signup", upload.single("picture"), signup);
+
+router.post("/AirlineSignup", upload.single("picture"), signup);
 router.post(
-  "/signin",
+  "/AirlineSignin",
   passport.authenticate("local", { session: false }),
   signin
 );
-
 module.exports = router;
