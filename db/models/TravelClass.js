@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
-  const Airplane = sequelize.define(
-    "Airplane",
+  const TravelClass = sequelize.define(
+    "TravelClass",
     {
-      name: {
+      type: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -10,5 +10,5 @@ module.exports = (sequelize, DataTypes) => {
     { timestamps: false }
   );
 
-  return Airplane;
+  return TravelClass;
 };

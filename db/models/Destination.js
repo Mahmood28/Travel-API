@@ -2,9 +2,9 @@ module.exports = (sequelize, DataTypes) => {
   const Destination = sequelize.define(
     "Destination",
     {
-      name: {
+      airport: {
         type: DataTypes.STRING(3),
-        allowNull: false,
+        allowNull: true,
       },
       country: {
         type: DataTypes.STRING,
