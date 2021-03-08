@@ -2,8 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const TravelClass = sequelize.define(
     "TravelClass",
     {
-      type: {
-        type: DataTypes.ENUM("Economy", "Business"),
+      name: {
+        type: DataTypes.ENUM,
+        values: ["Economy", "Business"],
+        defaultValue: "Economy",
         allowNull: false,
       },
     },

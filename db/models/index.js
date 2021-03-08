@@ -63,4 +63,24 @@ db.Flight.belongsTo(db.Airplane, {
   as: "airplane",
 });
 
+db.Airplane.hasMany(db.TravelClassCapacity, {
+  foreignKey: { fieldName: "airplaneId" },
+  as: "capacities",
+});
+
+db.TravelClassCapacity.belongsTo(db.Airplane, {
+  foreignKey: { fieldName: "airplaneId" },
+  as: "airplane",
+});
+
+db.TravelClass.hasMany(db.TravelClassCapacity, {
+  foreignKey: { fieldName: "travelClassId" },
+  as: "capacities",
+});
+
+db.TravelClassCapacity.belongsTo(db.TravelClass, {
+  foreignKey: { fieldName: "travelClassId" },
+  as: "travelClass",
+});
+
 module.exports = db;

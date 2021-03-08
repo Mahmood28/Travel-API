@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const TravelClassCapacity = sequelize.define(
     "TravelClassCapacity",
     {
-      seats: {
+      capacity: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
