@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const {
-	signup,
-	signin,
-	fetchAirline,
-	airlineList,
-	flightCreate,
-} = require('../controllers/airlineControllers');
-const upload = require('../middleware/multer');
+  signup,
+  signin,
+  fetchAirline,
+  airlineList,
+  airlineDetail,
+  flightCreate,
+} = require("../controllers/airlineControllers");
+const upload = require("../middleware/multer");
+
 
 router.param('airlineId', async (req, res, next, airlineId) => {
 	const foundAirline = await fetchAirline(airlineId, next);
@@ -31,7 +33,10 @@ router.post(
 	signin
 );
 
-router.get('/airlines', airlineList);
+router.get("/", airlineList);
+
+router.get("/:airlineId", airlineDetail);
+
 
 router.post(
 	'/:airlineId/flights',
