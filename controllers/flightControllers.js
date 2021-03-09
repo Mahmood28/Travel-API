@@ -61,7 +61,7 @@ exports.flightSearch = async (req, res, next) => {
           [Op.or]: flights.map((flight) => flight.id),
         },
         vacancy: {
-          [Op.gt]: passangers,
+          [Op.gt]: passangers - 1,
         },
       },
     });
