@@ -6,6 +6,7 @@ const {
   signin,
   fetchAirline,
   airlineList,
+  airlineDetail,
   flightCreate,
 } = require("../controllers/airlineControllers");
 const upload = require("../middleware/multer");
@@ -31,7 +32,9 @@ router.post(
   signin
 );
 
-router.get("/airlines", airlineList);
+router.get("/", airlineList);
+
+router.get("/:airlineId", airlineDetail);
 
 router.post(
   "/:airlineId/flights",

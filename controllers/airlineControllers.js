@@ -53,11 +53,13 @@ exports.fetchAirline = async (airlineId, next) => {
 exports.airlineList = async (req, res, next) => {
   try {
     const airlines = await Airline.findAll({
-      // include: {
-      //   model: Flight,
-      //   as: "flights",
-      //   attributes: ["id"],
-      // },
+      include: {
+        model: Flight,
+        as: "flights",
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
     });
 
     res.json(airlines);
@@ -66,13 +68,32 @@ exports.airlineList = async (req, res, next) => {
   }
 };
 
+exports.airlineDetail = async (req, res, next) => {
+  res.json(req.airline);
+};
+
 exports.flightCreate = async (req, res, next) => {
   try {
-    console.log("aaa");
+    const {
+      arrivalAirport,
+      departureAirport,
+      departureTime,
+      arrivalTime,
+    } = req.body;
     req.body.airlineId = req.airline.id;
 
     console.log(req.body);
-    const newFlight = await Flight.create(req.body);
+    const newFlight = await Flight.bulkCreate([
+      req.body,
+      {
+        ...req.body,
+        name: req.body.name + 1324,
+        arrivalAirport: departureAirport,
+        departureAirport: arrivalAirport,
+        departureTime: +arrivalTime + 0.5,
+        arrivalTime: 2 * +arrivalTime - +departureTime + 0.5,
+      },
+    ]);
     res.status(201).json(newFlight);
   } catch (error) {
     next(error);
