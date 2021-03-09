@@ -30,18 +30,21 @@ exports.flightList = async (req, res, next) => {
 
 exports.flightSearch = async (req, res, next) => {
   try {
+    console.log(req.body);
     const {
-      destinationAirport,
+      arrivalAirport,
       departureAirport,
       departureDate,
       arrivalDate,
       passangers,
     } = req.body;
+    console.log(req.body);
     const destination = await Destination.findOne({
       where: {
-        airport: destinationAirport,
+        airport: arrivalAirport,
       },
     });
+    console.log(destination);
     const flights = await Flight.findAll({
       where: {
         destinationId: destination.id,

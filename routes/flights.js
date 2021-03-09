@@ -5,10 +5,8 @@ const {
   flightSearch,
 } = require("../controllers/flightControllers");
 
-
-
 router.get("/", flightList);
 
-router.get("/search", flightSearch);
+router.post("/search", flightSearch);
 
 module.exports = router;
