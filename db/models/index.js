@@ -85,4 +85,13 @@ db.TravelClass.hasMany(db.Booking, { as: 'book', foreignKey: 'travelClassId' });
 
 db.Booking.belongsTo(db.TravelClass, { as: 'travelClass' });
 
+db.Booking.belongsToMany(db.Flight, {
+	through: db.BookingFlight,
+	foreignKey: 'bookId',
+});
+db.Flight.belongsToMany(db.Booking, {
+	through: db.BookingFlight,
+	foreignKey: 'flightId',
+});
+
 module.exports = db;
