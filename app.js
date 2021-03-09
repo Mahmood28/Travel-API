@@ -6,6 +6,7 @@ const path = require("path");
 const userRoutes = require("./routes/users");
 const airlinesRoutes = require("./routes/airlines");
 const flightRoutes = require("./routes/flights");
+const destinationRoutes = require("./routes/destinations");
 const passport = require("passport");
 require("./middleware/passport")(passport);
 
@@ -21,6 +22,7 @@ app.use(passport.initialize());
 app.use("/flights", flightRoutes);
 app.use(userRoutes);
 app.use("/airlines", airlinesRoutes);
+app.use("/destinations", destinationRoutes);
 // app.use(airlinesRoutes);
 
 app.use("/media", express.static(path.join(__dirname, "media")));

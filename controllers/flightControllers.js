@@ -1,22 +1,26 @@
-const { Flight, Destination, TravelClassCapacity , Airline} = require("../db/models");
+const {
+  Flight,
+  Destination,
+  TravelClassCapacity,
+  Airline,
+} = require("../db/models");
 const { Op } = require("sequelize");
-
-
 
 exports.flightList = async (req, res, next) => {
   try {
     const flights = await Flight.findAll({
-      include: {
-        model: Airline,
-        as: "airlines",
-        // attributes: ["id"],
-      },
-    });
-
-        model: Destination,
-        as: "destination",
-        attributes: ["airport"],
-      },
+      include: [
+        {
+          model: Airline,
+          as: "airlines",
+          attributes: ["id"],
+        },
+        {
+          model: Destination,
+          as: "destination",
+          attributes: ["airport"],
+        },
+      ],
     });
     res.json(flights);
   } catch (error) {
