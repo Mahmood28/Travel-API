@@ -99,3 +99,19 @@ exports.flightCreate = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.flightUpdate = async (req, res) => {
+  const { flightId } = req.params;
+  try {
+    const foundFlight = await Flight.findByPk(flightId);
+    if (foundFlight) {
+      await foundFlight.update(req.body);
+
+      res.status(204).end();
+    } else {
+      res.status(404).json({ message: "Sorry Flight Not Found!" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

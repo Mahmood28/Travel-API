@@ -32,6 +32,7 @@ exports.flightDetail = async (req, res, next) => {
 
 
 
+
 exports.flightSearch = async (req, res, next) => {
 	try {
 		const {
