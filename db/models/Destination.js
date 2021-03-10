@@ -3,6 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     "Destination",
     {
       airport: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      code: {
         type: DataTypes.STRING(3),
         allowNull: true,
       },
