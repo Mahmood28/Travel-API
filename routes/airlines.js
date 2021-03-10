@@ -6,7 +6,9 @@ const {
   signin,
   fetchAirline,
   airlineList,
+  airlineDetail,
   flightCreate,
+  flightUpdate,
 } = require("../controllers/airlineControllers");
 const upload = require("../middleware/multer");
 
@@ -31,11 +33,15 @@ router.post(
   signin
 );
 
-router.get("/airlines", airlineList);
+router.get("/", airlineList);
+
+router.get("/:airlineId", airlineDetail);
+
+router.put("/:airlineId/flights/:flightId", flightUpdate);
 
 router.post(
   "/:airlineId/flights",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("airline", { session: false }),
   flightCreate
 );
 

@@ -22,15 +22,23 @@ exports.flightList = async (req, res, next) => {
         },
       ],
     });
+
     res.json(flights);
   } catch (error) {
     next(error);
   }
+
 };
+
+exports.flightDetail = async (req, res, next) => {
+  res.json(req.flight);
+};
+
+
+
 
 exports.flightSearch = async (req, res, next) => {
   try {
-    console.log(req.body);
     const {
       arrivalAirport,
       departureAirport,
@@ -38,13 +46,11 @@ exports.flightSearch = async (req, res, next) => {
       arrivalDate,
       passangers,
     } = req.body;
-    console.log(req.body);
     const destination = await Destination.findOne({
       where: {
         airport: arrivalAirport,
       },
     });
-    console.log(destination);
     const flights = await Flight.findAll({
       where: {
         destinationId: destination.id,
