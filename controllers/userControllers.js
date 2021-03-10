@@ -50,17 +50,7 @@ exports.signin = (req, res) => {
 
 exports.myprofile = async (req, res) => {
 	try {
-		const user = await req.user;
-		const payload = {
-			id: user.id,
-			username: user.username,
-			email: user.email,
-			firstName: user.firstName,
-			lastName: user.lastName,
-			passport: user.passport,
-			picture: user.picture,
-		};
-		res.json(payload);
+		res.status(200).json(req.user);
 	} catch (error) {
 		next(error);
 	}
