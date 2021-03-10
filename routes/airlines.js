@@ -41,7 +41,7 @@ router.put("/:airlineId/flights/:flightId", flightUpdate);
 
 router.post(
   "/:airlineId/flights",
-  passport.authenticate("airline", { session: false }),
+  passport.authenticate("jwt-airline", { session: false }),
   flightCreate
 );
 
