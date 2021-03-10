@@ -30,7 +30,16 @@ router.post(
 	passport.authenticate('user', { session: false }),
 	signin
 );
-router.get('/:userId', myprofile);
-router.put('/:userId', upload.single('picture'), Updateprofile);
+router.get(
+	'/myprofile',
+	passport.authenticate('jwt-user', { session: false }),
+	myprofile
+);
+router.put(
+	'/Updateprofile',
+	passport.authenticate('jwt-user', { session: false }),
+	upload.single('picture'),
+	Updateprofile
+);
 
 module.exports = router;
