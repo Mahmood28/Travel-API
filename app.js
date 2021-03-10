@@ -1,14 +1,15 @@
 //imports
-const db = require('./db/models');
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const userRoutes = require('./routes/users');
-const airlinesRoutes = require('./routes/airlines');
-const flightRoutes = require('./routes/flights');
+const db = require("./db/models");
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const userRoutes = require("./routes/users");
+const airlinesRoutes = require("./routes/airlines");
+const flightRoutes = require("./routes/flights");
+const destinationRoutes = require("./routes/destinations");
 const bookingRoutes = require('./routes/booking');
-const passport = require('passport');
-require('./middleware/passport')(passport);
+const passport = require("passport");
+require("./middleware/passport")(passport);
 
 // const { jwtStrategy } = require("./middleware/passport");
 
@@ -22,7 +23,8 @@ app.use(passport.initialize());
 app.use('/flights', flightRoutes);
 app.use('/booking', bookingRoutes);
 app.use(userRoutes);
-app.use('/airlines', airlinesRoutes);
+app.use("/airlines", airlinesRoutes);
+app.use("/destinations", destinationRoutes);
 // app.use(airlinesRoutes);
 
 app.use('/media', express.static(path.join(__dirname, 'media')));
