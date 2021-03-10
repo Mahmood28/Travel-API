@@ -2,6 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Airline = sequelize.define(
     "Airline",
     {
+      // REVIEW: name is enough
       nameOfAirline: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -22,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Email already exists",
         },
       },
+      // REVIEW: logo can be a better name
       picture: {
         type: DataTypes.STRING,
         allowNull: true,

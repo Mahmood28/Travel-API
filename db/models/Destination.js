@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      // REVIEW: what exactly is the location?
       location: {
         type: DataTypes.STRING,
         allowNull: false,

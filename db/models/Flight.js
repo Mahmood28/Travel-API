@@ -43,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      // REVIEW: isn't this the same as the destination model?
       departureAirport: {
         type: DataTypes.STRING(3),
         allowNull: false,
