@@ -26,7 +26,9 @@ app.use('/airlines', airlinesRoutes);
 app.use('/destinations', destinationRoutes);
 app.use('/user', userRoutes);
 
+
 app.use('/media', express.static(path.join(__dirname, 'media')));
+
 
 app.use((req, res, next) => {
 	const error = {
