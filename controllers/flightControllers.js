@@ -62,12 +62,17 @@ exports.flightSearch = async (req, res, next) => {
         {
           model: Destination,
           as: "destination",
-          attributes: ["code"],
+          attributes: ["airport", "code", "country", "city"],
         },
         {
           model: Destination,
           as: "origin",
-          attributes: ["code"],
+          attributes: ["airport", "code", "country", "city"],
+        },
+        {
+          model: Airline,
+          as: "airlines",
+          attributes: ["name", "logo"],
         },
       ],
     });
