@@ -12,4 +12,7 @@ router.post(
   bookingCreate
 );
 router.get("/", bookingList);
+router.post('/', bookingCreate);
+router.get('/', bookingList);
+
 module.exports = router;

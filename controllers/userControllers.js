@@ -1,9 +1,17 @@
-
 const { User } = require('../db/models');
 const bcrypt = require('bcrypt');
 const upload = require('../middleware/multer');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, JWT_EXPIRATION_MS } = require('../config/keys');
+
+exports.fetchUser = async (userId, next) => {
+	try {
+		const foundUser = await User.findByPk(userId);
+		return foundUser;
+	} catch (error) {
+		next(error);
+	}
+};
 exports.signup = async (req, res, next) => {
 	const { password } = req.body;
 	const saltRounds = 10;
@@ -38,4 +46,20 @@ exports.signin = (req, res) => {
 	};
 	const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
 	res.json({ token });
+};
+
+exports.myprofile = async (req, res) => {
+	try {
+		res.status(200).json(req.user);
+	} catch (error) {
+		next(error);
+	}
+};
+
+exports.Updateprofile = async (req, res) => {
+	if (req.file) {
+		req.body.picture = `http://${req.get('host')}/media/${req.file.filename}`;
+	}
+	await req.user.update(req.body);
+	res.json(req.user);
 };

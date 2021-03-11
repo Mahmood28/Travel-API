@@ -1,7 +1,9 @@
-const { Airline, Flight } = require("../db/models");
 const bcrypt = require("bcrypt");
 const upload = require("../middleware/multer");
 const jwt = require("jsonwebtoken");
+//models
+const { Airline, Flight } = require("../db/models");
+//keys
 const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../config/keys");
 
 exports.signup = async (req, res, next) => {
