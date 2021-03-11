@@ -83,23 +83,25 @@ exports.flightCreate = async (req, res, next) => {
 			arrivalTime,
 		} = req.body;
 		req.body.airlineId = req.airline.id;
+    // console.log(req.body);
+    const newFlight = await Flight.bulkCreate([
+      req.body,
+      {
+        ...req.body,
+        name: req.body.name + 1324,
+        arrivalAirport: departureAirport,
+        departureAirport: arrivalAirport,
+        departureTime: +arrivalTime + 0.5,
+        arrivalTime: 2 * +arrivalTime - +departureTime + 0.5,
+      },
+    ]);
+    res.status(201).json(newFlight);
+  } catch (error) {
+    console.log(error);
 
-		console.log(req.body);
-		const newFlight = await Flight.bulkCreate([
-			req.body,
-			{
-				...req.body,
-				name: req.body.name + 1324,
-				arrivalAirport: departureAirport,
-				departureAirport: arrivalAirport,
-				departureTime: +arrivalTime + 0.5,
-				arrivalTime: 2 * +arrivalTime - +departureTime + 0.5,
-			},
-		]);
-		res.status(201).json(newFlight);
-	} catch (error) {
-		next(error);
-	}
+    next(error);
+  }
+
 };
 
 exports.flightUpdate = async (req, res) => {
