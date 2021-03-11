@@ -38,7 +38,6 @@ exports.flightSearch = async (req, res, next) => {
       arrivalAirport,
       departureAirport,
       departureDate,
-      arrivalDate,
       passangers,
     } = req.body;
     const now = new Date();
@@ -60,7 +59,6 @@ exports.flightSearch = async (req, res, next) => {
           destinationId: arrivalAirport,
           originId: departureAirport,
           departureDate,
-          arrivalDate,
           [Op.or]: [
             {
               departureTime: {
