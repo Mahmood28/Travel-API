@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Airline = sequelize.define(
     "Airline",
     {
-      nameOfAirline: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Email already exists",
         },
       },
-      picture: {
+      logo: {
         type: DataTypes.STRING,
         allowNull: true,
       },

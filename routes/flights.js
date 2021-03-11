@@ -11,6 +11,6 @@ router.get("/", flightList);
 
 router.get("/:flightId", flightDetail);
 
-router.get("/search", flightSearch);
+router.post("/search", flightSearch);
 
 module.exports = router;
