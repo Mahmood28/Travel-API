@@ -22,9 +22,9 @@ app.use(passport.initialize());
 // passport.use(jwtStrategy);
 app.use("/flights", flightRoutes);
 app.use("/booking", bookingRoutes);
-app.use(userRoutes);
 app.use("/airlines", airlinesRoutes);
 app.use("/destinations", destinationRoutes);
+app.use(userRoutes);
 // app.use(airlinesRoutes);
 
 app.use("/media", express.static(path.join(__dirname, "media")));
