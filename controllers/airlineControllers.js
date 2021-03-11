@@ -82,7 +82,7 @@ exports.flightCreate = async (req, res, next) => {
     } = req.body;
     req.body.airlineId = req.airline.id;
 
-    console.log(req.body);
+    // console.log(req.body);
     const newFlight = await Flight.bulkCreate([
       req.body,
       {
@@ -96,6 +96,8 @@ exports.flightCreate = async (req, res, next) => {
     ]);
     res.status(201).json(newFlight);
   } catch (error) {
+    console.log(error);
+
     next(error);
   }
 };
