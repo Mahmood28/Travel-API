@@ -6,10 +6,6 @@ const {
 	bookingList,
 } = require('../controllers/bookingControllers');
 
-router.post(
-	'/',
-	passport.authenticate('jwt-user', { session: false }),
-	bookingCreate
-);
+router.post('/', bookingCreate);
 router.get('/', bookingList);
 module.exports = router;
