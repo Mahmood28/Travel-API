@@ -1,4 +1,3 @@
-//imports
 const db = require("./db/models");
 const express = require("express");
 const cors = require("cors");
@@ -11,21 +10,19 @@ const bookingRoutes = require("./routes/booking");
 const passport = require("passport");
 require("./middleware/passport")(passport);
 
-// const { jwtStrategy } = require("./middleware/passport");
-
 const app = express();
 
 //Middleware
 app.use(express.json());
 app.use(cors());
 app.use(passport.initialize());
-// passport.use(jwtStrategy);
+
 app.use("/flights", flightRoutes);
 app.use("/booking", bookingRoutes);
 app.use("/airlines", airlinesRoutes);
 app.use("/destinations", destinationRoutes);
-app.use(userRoutes);
-// app.use(airlinesRoutes);
+app.use("user", userRoutes);
+
 
 app.use("/media", express.static(path.join(__dirname, "media")));
 
@@ -48,8 +45,3 @@ db.sequelize.sync({ alter: true });
 // db.sequelize.sync({ force: true });
 app.listen(8000);
 
-//yarn add express cors sequelize sequelize-cli pg pg-hstore multer
-//yarn add bcrypt
-//yarn add passport
-//yarn add passport-local
-// yarn add jsonwebtoken
