@@ -10,14 +10,14 @@ exports.flightList = async (req, res, next) => {
     const flights = await Flight.findAll({
       include: [
         {
-          model: Airline,
-          as: "airlines",
-          attributes: ["id"],
+          model: Destination,
+          as: "destination",
+          attributes: ["airport", "code"],
         },
         {
           model: Destination,
-          as: "destination",
-          attributes: ["airport"],
+          as: "origin",
+          attributes: ["airport", "code"],
         },
       ],
     });
