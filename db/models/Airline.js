@@ -1,10 +1,16 @@
+const SequelizeSlugify = require("sequelize-slugify");
+
 module.exports = (sequelize, DataTypes) => {
   const Airline = sequelize.define(
     "Airline",
     {
-      nameOfAirline: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      slug: {
+        type: DataTypes.STRING,
+        unique: true,
       },
       username: {
         type: DataTypes.STRING,
@@ -22,13 +28,17 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Email already exists",
         },
       },
-      picture: {
+      logo: {
         type: DataTypes.STRING,
         allowNull: true,
       },
     },
     { timestamps: false }
   );
+
+  SequelizeSlugify.slugifyModel(Airline, {
+    source: ["nameOfAirline"],
+  });
 
   return Airline;
 };
