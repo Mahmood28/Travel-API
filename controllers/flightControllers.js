@@ -22,7 +22,7 @@ exports.flightList = async (req, res, next) => {
       ],
     });
 
-    res.json(flights);
+    res.json({ flights });
   } catch (error) {
     next(error);
   }
@@ -39,6 +39,7 @@ exports.flightSearch = async (req, res, next) => {
       departureAirport,
       departureDate,
       passangers,
+      returnDate,
     } = req.body;
     const now = new Date();
     const flightCapacity = await TravelClassCapacity.findAll({
@@ -48,29 +49,59 @@ exports.flightSearch = async (req, res, next) => {
         },
       },
     });
-    const flightIds = flightCapacity.map((flights) => flights.flightId);
+    const flightIds = flightCapacity.map(
+      (foundFlights) => foundFlights.flightId
+    );
     if (flightIds.length === 0) res.json([]);
-    else {
-      const foundFlights = await Flight.findAll({
+    let returnFlights = [];
+    const flights = await Flight.findAll({
+      where: {
+        id: {
+          [Op.or]: flightIds,
+        },
+        destinationId: arrivalAirport,
+        originId: departureAirport,
+        departureDate,
+        [Op.or]: [
+          {
+            departureTime: {
+              [Op.gte]: now.getHours() + now.getMinutes() / 60,
+            },
+          },
+          {
+            departureDate: {
+              [Op.ne]: now.toISOString().slice(0, 10),
+            },
+          },
+        ],
+      },
+      include: [
+        {
+          model: Destination,
+          as: "destination",
+          attributes: ["airport", "code", "country", "city"],
+        },
+        {
+          model: Destination,
+          as: "origin",
+          attributes: ["airport", "code", "country", "city"],
+        },
+        {
+          model: Airline,
+          as: "airlines",
+          attributes: ["name", "logo"],
+        },
+      ],
+    });
+    if (returnDate) {
+      returnFlights = await Flight.findAll({
         where: {
           id: {
             [Op.or]: flightIds,
           },
-          destinationId: arrivalAirport,
-          originId: departureAirport,
-          departureDate,
-          [Op.or]: [
-            {
-              departureTime: {
-                [Op.gte]: now.getHours() + now.getMinutes() / 60,
-              },
-            },
-            {
-              departureDate: {
-                [Op.ne]: now.toISOString().slice(0, 10),
-              },
-            },
-          ],
+          destinationId: departureAirport,
+          originId: arrivalAirport,
+          departureDate: returnDate,
         },
         include: [
           {
@@ -90,8 +121,8 @@ exports.flightSearch = async (req, res, next) => {
           },
         ],
       });
-      res.json(foundFlights);
     }
+    res.json({ flights, returnFlights });
   } catch (error) {
     next(error);
   }
