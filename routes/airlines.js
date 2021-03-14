@@ -25,10 +25,10 @@ router.param("airlineId", async (req, res, next, airlineId) => {
   }
 });
 
-router.post("/airlinesignup", upload.single("picture"), signup);
+router.post("/signup", upload.single("logo"), signup);
 
 router.post(
-  "/airlinesignin",
+  "/signin",
   passport.authenticate("airline", { session: false }),
   signin
 );
@@ -37,7 +37,11 @@ router.get("/", airlineList);
 
 router.get("/:airlineId", airlineDetail);
 
-router.put("/:airlineId/flights/:flightId", flightUpdate);
+router.put(
+  "/:airlineId/flights/:flightId",
+  passport.authenticate("jwt-airline", { session: false }),
+  flightUpdate
+);
 
 router.post(
   "/:airlineId/flights",

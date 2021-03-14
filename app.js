@@ -45,4 +45,5 @@ app.use((err, req, res, next) => {
 db.sequelize.sync();
 // db.sequelize.sync({ alter: true });
 //db.sequelize.sync({ force: true });
+
 app.listen(8000);
