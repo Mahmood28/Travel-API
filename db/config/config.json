@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "meshekah",
-    "password": null,
+    "username": "postgres",
+    "password": "123456",
     "database": "travel_db",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "test": {
     "username": "root",
