@@ -2,9 +2,7 @@ const { Booking } = require('../db/models');
 
 exports.bookingCreate = async (req, res, next) => {
 	try {
-		const newBook = await Booking.bulkCreate(
-			req.body.map((booking) => ({ ...booking, userId: req.user.id }))
-		);
+		const newBook = await Booking.bulkCreate(req.body);
 		res.status(201).json(newBook);
 	} catch (error) {
 		next(error);
