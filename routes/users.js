@@ -8,6 +8,7 @@ const {
 	myprofile,
 	fetchUser,
 	Updateprofile,
+	orderHistory,
 } = require('../controllers/userControllers');
 const upload = require('../middleware/multer');
 
@@ -40,6 +41,11 @@ router.put(
 	passport.authenticate('jwt-user', { session: false }),
 	upload.single('picture'),
 	Updateprofile
+);
+router.get(
+	'/history',
+	passport.authenticate('jwt-user', { session: false }),
+	orderHistory
 );
 
 module.exports = router;
