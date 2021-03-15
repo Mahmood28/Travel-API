@@ -1,8 +1,8 @@
-const { User, Booking, Flight } = require('../db/models');
-const bcrypt = require('bcrypt');
-const upload = require('../middleware/multer');
-const jwt = require('jsonwebtoken');
-const { JWT_SECRET, JWT_EXPIRATION_MS } = require('../config/keys');
+const { User, Booking, Flight } = require("../db/models");
+const bcrypt = require("bcrypt");
+const upload = require("../middleware/multer");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../config/keys");
 
 exports.fetchUser = async (userId, next) => {
   try {
@@ -69,39 +69,39 @@ exports.Updateprofile = async (req, res) => {
   res.json(req.user);
 };
 
-// exports.orderHistory = async (req, res, next) => {
-// 	try {
-// 		const userId = req.user.id;
-// 		const passengers = await Booking.findAll({
-// 			where: {
-// 				userId,
-// 			},
-// 			include: [
-// 				{
-// 					model: Flight,
-// 				},
-// 			],
-// 		});
-// 		const bookId = passengers.map((foundBook) => foundBook.id);
-// 		const flightsID = await BookingFlight.findAll({
-// 			where: {
-// 				bookId,
-// 			},
-// 		});
-// 		const id = flightsID.map((foundBook) => foundBook.flightId);
-// 		const flights = await Flight.findAll({
-// 			where: {
-// 				id,
-// 			},
-// 			include: [
-// 				{
-// 					model: Booking,
-// 				},
-// 			],
-// 		});
+exports.orderHistory = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const passengers = await Booking.findAll({
+      where: {
+        userId,
+      },
+      include: [
+        {
+          model: Flight,
+        },
+      ],
+    });
+    const bookId = passengers.map((foundBook) => foundBook.id);
+    const flightsID = await BookingFlight.findAll({
+      where: {
+        bookId,
+      },
+    });
+    const id = flightsID.map((foundBook) => foundBook.flightId);
+    const flights = await Flight.findAll({
+      where: {
+        id,
+      },
+      include: [
+        {
+          model: Booking,
+        },
+      ],
+    });
 
-// 		res.status(200).json(flights);
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// };
+    res.status(200).json(flights);
+  } catch (error) {
+    next(error);
+  }
+};

@@ -40,6 +40,7 @@ exports.flightSearch = async (req, res, next) => {
       departureDate,
       passengers,
       returnDate,
+      travelClassId,
     } = req.body;
     const now = new Date();
     const flightCapacity = await TravelClassCapacity.findAll({
@@ -47,6 +48,7 @@ exports.flightSearch = async (req, res, next) => {
         vacancy: {
           [Op.gte]: passengers,
         },
+        travelClassId,
       },
     });
     const flightIds = flightCapacity.map(
