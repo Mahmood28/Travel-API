@@ -1,15 +1,14 @@
-const db = require("./db/models");
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const userRoutes = require("./routes/users");
-const airlinesRoutes = require("./routes/airlines");
-const flightRoutes = require("./routes/flights");
-const destinationRoutes = require("./routes/destinations");
-const bookingRoutes = require("./routes/booking");
-const passport = require("passport");
-require("./middleware/passport")(passport);
-
+const db = require('./db/models');
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const userRoutes = require('./routes/users');
+const airlinesRoutes = require('./routes/airlines');
+const flightRoutes = require('./routes/flights');
+const destinationRoutes = require('./routes/destinations');
+const bookingRoutes = require('./routes/booking');
+const passport = require('passport');
+require('./middleware/passport')(passport);
 
 const app = express();
 
