@@ -1,15 +1,15 @@
-const db = require('./db/models');
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const userRoutes = require('./routes/users');
-const airlinesRoutes = require('./routes/airlines');
-const flightRoutes = require('./routes/flights');
-// const { jwtStrategy } = require("./middleware/passport");
-const destinationRoutes = require('./routes/destinations');
-const bookingRoutes = require('./routes/booking');
-const passport = require('passport');
-require('./middleware/passport')(passport);
+const db = require("./db/models");
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const userRoutes = require("./routes/users");
+const airlinesRoutes = require("./routes/airlines");
+const flightRoutes = require("./routes/flights");
+const destinationRoutes = require("./routes/destinations");
+const bookingRoutes = require("./routes/booking");
+const passport = require("passport");
+require("./middleware/passport")(passport);
+
 
 const app = express();
 
@@ -17,8 +17,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(passport.initialize());
-// passport.use(jwtStrategy);
-// app.use(airlinesRoutes);
 
 app.use('/flights', flightRoutes);
 app.use('/booking', bookingRoutes);

@@ -10,7 +10,6 @@ exports.signup = async (req, res, next) => {
   const { password } = req.body;
   const saltRounds = 10;
   try {
-    console.log(req.body);
     if (req.file) {
       req.body.logo = `http://${req.get("host")}/media/${req.file.filename}`;
     }
@@ -19,10 +18,10 @@ exports.signup = async (req, res, next) => {
     const newAirline = await Airline.create(req.body);
     const payload = {
       id: newAirline.id,
-      nameOfAirline: newAirline.nameOfAirline,
+      name: newAirline.name,
       username: newAirline.username,
       email: newAirline.email,
-      // isAirline: newAirline.isAirline,
+      isAirline: true,
       exp: Date.now() + JWT_EXPIRATION_MS,
     };
     const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
@@ -36,8 +35,10 @@ exports.signin = (req, res) => {
   const { user } = req;
   const payload = {
     id: user.id,
+    name: user.name,
     username: user.username,
-    // isAirline: user.isAirline,
+    email: user.email,
+    isAirline: true,
     exp: Date.now() + parseInt(JWT_EXPIRATION_MS),
   };
 
@@ -78,16 +79,8 @@ exports.airlineDetail = async (req, res, next) => {
 
 exports.flightCreate = async (req, res, next) => {
   try {
-    const {
-      // arrivalAirport,
-      // departureAirport,
-      destinationId,
-      departureTime,
-      arrivalTime,
-      originId,
-    } = req.body;
+    const { destinationId, departureTime, arrivalTime, originId } = req.body;
     req.body.airlineId = req.airline.id;
-    // console.log(req.body);
     const newFlight = await Flight.bulkCreate(
       [
         req.body,

@@ -38,14 +38,14 @@ exports.flightSearch = async (req, res, next) => {
       arrivalAirport,
       departureAirport,
       departureDate,
-      passangers,
+      passengers,
       returnDate,
     } = req.body;
     const now = new Date();
     const flightCapacity = await TravelClassCapacity.findAll({
       where: {
         vacancy: {
-          [Op.gte]: passangers,
+          [Op.gte]: passengers,
         },
       },
     });

@@ -87,21 +87,31 @@ db.TravelClassCapacity.belongsTo(db.TravelClass, {
   as: "travelClass",
 });
 
-db.User.hasMany(db.Booking, { as: "book", foreignKey: "userId" });
+db.User.hasMany(db.Booking, { as: "booking", foreignKey: "userId" });
 
 db.Booking.belongsTo(db.User, { as: "user" });
 
-db.TravelClass.hasMany(db.Booking, { as: "book", foreignKey: "travelClassId" });
+db.TravelClass.hasMany(db.Booking, {
+  as: "booking",
+  foreignKey: "travelClassId",
+});
 
 db.Booking.belongsTo(db.TravelClass, { as: "travelClass" });
 
 db.Booking.belongsToMany(db.Flight, {
-  through: db.BookingFlight,
-  foreignKey: "bookId",
+  through: "BookingFlights",
+  foreignKey: "bookingId",
 });
 db.Flight.belongsToMany(db.Booking, {
-  through: db.BookingFlight,
+  through: "BookingFlights",
   foreignKey: "flightId",
 });
+
+db.Booking.hasMany(db.Passenger, {
+  as: "passenger",
+  foreignKey: "bookingId",
+});
+
+db.Passenger.belongsTo(db.Booking, { as: "booking" });
 
 module.exports = db;

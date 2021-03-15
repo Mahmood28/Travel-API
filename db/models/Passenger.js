@@ -1,16 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    "User",
+  const Passenger = sequelize.define(
+    "Passenger",
     {
-      username: {
+      firstName: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: {
-          args: true,
-          msg: "Username already exists",
-        },
       },
-      password: {
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      passport: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -25,25 +25,13 @@ module.exports = (sequelize, DataTypes) => {
         //     isEmail: true
         //   }
       },
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      passport: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      picture: {
-        type: DataTypes.STRING,
+      birthDate: {
+        type: DataTypes.DATEONLY,
         allowNull: true,
       },
     },
     { timestamps: false }
   );
 
-  return User;
+  return Passenger;
 };
