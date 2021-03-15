@@ -22,7 +22,7 @@ exports.signup = async (req, res, next) => {
       nameOfAirline: newAirline.nameOfAirline,
       username: newAirline.username,
       email: newAirline.email,
-      // isAirline: newAirline.isAirline,
+      isAirline: true,
       exp: Date.now() + JWT_EXPIRATION_MS,
     };
     const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
@@ -37,7 +37,7 @@ exports.signin = (req, res) => {
   const payload = {
     id: user.id,
     username: user.username,
-    // isAirline: user.isAirline,
+    isAirline: true,
     exp: Date.now() + parseInt(JWT_EXPIRATION_MS),
   };
 
@@ -78,16 +78,8 @@ exports.airlineDetail = async (req, res, next) => {
 
 exports.flightCreate = async (req, res, next) => {
   try {
-    const {
-      // arrivalAirport,
-      // departureAirport,
-      destinationId,
-      departureTime,
-      arrivalTime,
-      originId,
-    } = req.body;
+    const { destinationId, departureTime, arrivalTime, originId } = req.body;
     req.body.airlineId = req.airline.id;
-    // console.log(req.body);
     const newFlight = await Flight.bulkCreate(
       [
         req.body,
