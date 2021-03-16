@@ -11,6 +11,7 @@ const bookingsRoutes = require("./routes/bookings");
 const passport = require("passport");
 require("./middleware/passport")(passport);
 
+
 const app = express();
 
 //Middleware
