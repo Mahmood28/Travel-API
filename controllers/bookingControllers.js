@@ -25,10 +25,10 @@ const bookingConfirmation = async (user, passengers, foundClass) => {
 
 exports.bookingCreate = async (req, res, next) => {
   try {
-    const { flights, passengers, travelClassId, userId } = req.body;
+    const { flights, passengers, travelClassId, user } = req.body;
     const newBooking = await Booking.create({
       travelClassId,
-      userId,
+      userId: user ? user.id : null,
     });
     const newPassengers = await Passenger.bulkCreate(
       passengers.map((passenger) => ({

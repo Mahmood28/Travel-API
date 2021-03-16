@@ -70,38 +70,25 @@ exports.Updateprofile = async (req, res) => {
 };
 
 exports.orderHistory = async (req, res, next) => {
-  try {
-    const userId = req.user.id;
-    const passengers = await Booking.findAll({
-      where: {
-        userId,
-      },
-      include: [
-        {
-          model: Flight,
-        },
-      ],
-    });
-    const bookId = passengers.map((foundBook) => foundBook.id);
-    const flightsID = await BookingFlight.findAll({
-      where: {
-        bookId,
-      },
-    });
-    const id = flightsID.map((foundBook) => foundBook.flightId);
-    const flights = await Flight.findAll({
-      where: {
-        id,
-      },
-      include: [
-        {
-          model: Booking,
-        },
-      ],
-    });
-
-    res.status(200).json(flights);
-  } catch (error) {
-    next(error);
-  }
+	try {
+		const userId = req.user.id;
+		const passengers = await Booking.findAll({
+			where: {
+				userId,
+			},
+			include: [
+				{
+					model: Flight,
+					attributes: ['name', 'departureDate', 'departureTime', 'arrivalTime'],
+				},
+				{
+					model: Passenger,
+					as: 'passenger',
+				},
+			],
+		});
+		res.status(200).json(passengers);
+	} catch (error) {
+		next(error);
+	}
 };
