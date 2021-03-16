@@ -28,6 +28,8 @@ exports.flightList = async (req, res, next) => {
   }
 };
 
+//add status codes
+//controller not needed
 exports.flightDetail = async (req, res, next) => {
   res.json(req.flight);
 };

@@ -2,15 +2,15 @@ const db = require("./db/models");
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const passport = require("passport");
+require("./middleware/passport")(passport);
+//Add 'Routes' comment to sort imports
 const userRoutes = require("./routes/users");
 const airlinesRoutes = require("./routes/airlines");
 const flightRoutes = require("./routes/flights");
 const destinationRoutes = require("./routes/destinations");
 const travelClassesRoutes = require("./routes/travelClasses");
 const bookingsRoutes = require("./routes/bookings");
-const passport = require("passport");
-require("./middleware/passport")(passport);
-
 
 const app = express();
 

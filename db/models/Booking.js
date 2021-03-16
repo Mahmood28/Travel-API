@@ -1,5 +1,3 @@
-module.exports = (sequelize, DataTypes) => {
-  const Booking = sequelize.define("Booking", {});
+module.exports = (sequelize, DataTypes) => sequelize.define("Booking", {});
 
-  return Booking;
-};
+//shorten

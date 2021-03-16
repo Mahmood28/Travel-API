@@ -5,10 +5,14 @@ module.exports = (sequelize, DataTypes) => {
       airport: {
         type: DataTypes.STRING,
         allowNull: true,
+        //unique constraint
+        //allowNull should be false
       },
       code: {
         type: DataTypes.STRING(3),
         allowNull: true,
+        //unique constraint
+        //allowNull should be false
       },
       country: {
         type: DataTypes.STRING,

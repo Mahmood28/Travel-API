@@ -60,9 +60,10 @@ exports.bookingCreate = async (req, res, next) => {
 
 exports.bookingList = async (req, res, next) => {
   try {
-    const booking = await Booking.findAll();
-    res.json(booking);
+    res.json(await Booking.findAll());
   } catch (error) {
     next(error);
   }
 };
+//shorten
+//add status codes

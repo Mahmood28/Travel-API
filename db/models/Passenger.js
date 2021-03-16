@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       passport: {
         type: DataTypes.STRING,
         allowNull: false,
+        //unique
       },
       email: {
         type: DataTypes.STRING,
@@ -28,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       birthDate: {
         type: DataTypes.DATEONLY,
         allowNull: true,
+        //min value of reasonable recent date
       },
     },
     { timestamps: false }

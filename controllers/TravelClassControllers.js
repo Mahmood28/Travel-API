@@ -7,3 +7,4 @@ exports.travelClassList = async (req, res, next) => {
     next(error);
   }
 };
+//add status codes

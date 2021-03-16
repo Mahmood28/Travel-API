@@ -7,3 +7,4 @@ exports.destinationList = async (req, res, next) => {
     next(error);
   }
 };
+//add status codes

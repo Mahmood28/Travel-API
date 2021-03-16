@@ -6,7 +6,7 @@ const {
   flightUpdate,
   flightSearch,
 } = require("../controllers/flightControllers");
-
+//remove flightUpdate -> not used
 router.get("/", flightList);
 
 router.get("/:flightId", flightDetail);

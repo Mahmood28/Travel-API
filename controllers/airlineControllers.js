@@ -54,6 +54,7 @@ exports.fetchAirline = async (airlineId, next) => {
     next(error);
   }
 };
+//add status codes
 
 exports.airlineList = async (req, res, next) => {
   try {
@@ -73,6 +74,7 @@ exports.airlineList = async (req, res, next) => {
   }
 };
 
+//detail controller not needed
 exports.airlineDetail = async (req, res, next) => {
   res.json(req.airline);
 };
@@ -86,7 +88,7 @@ exports.flightCreate = async (req, res, next) => {
         req.body,
         {
           ...req.body,
-          name: req.body.name + 1324,
+          name: req.body.name + 1324, //better naming
           destinationId: originId,
           originId: destinationId,
           departureTime: +arrivalTime + 0.5,

@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       passport: {
         type: DataTypes.STRING,
         allowNull: true,
+        //unique
       },
       picture: {
         type: DataTypes.STRING,
